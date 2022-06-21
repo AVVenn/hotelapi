@@ -64,6 +64,24 @@ export const updateRoomAvailability = async (req, res, next) => {
   }
 };
 
+export const cancelBookingRoom = async (req, res, next) => {
+  try {
+    await Room.updateOne(
+      { _id: req.params.id },
+      {
+        $pull: {
+          booked: {
+            reservationId: req.body.reservationId,
+          },
+        },
+      }
+    );
+    res.status(200).json("Бронь места отмененена");
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const deleteRoom = async (req, res, next) => {
   try {
     await Room.findByIdAndDelete(req.params.id);

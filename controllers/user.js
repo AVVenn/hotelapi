@@ -2,10 +2,11 @@ import User from "../models/User.js";
 
 export const updateUser = async (req, res, next) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-      $set: req.body,
-      new: true,
-    });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
     res.status(200).json(updatedUser);
   } catch (err) {
     next(err);
@@ -20,6 +21,7 @@ export const updateUserAfterBooking = async (req, res, next) => {
         $push: {
           booking: {
             reservationId: req.body.reservationId,
+            roomId: req.body.roomId,
             dateStart: req.body.dateStart,
             dateEnd: req.body.dateEnd,
             firstName: req.body.firstName,
@@ -35,16 +37,35 @@ export const updateUserAfterBooking = async (req, res, next) => {
     );
     const responce = {
       reservationId: req.body.reservationId,
+      roomId: req.body.roomId,
       dateStart: req.body.dateStart,
       dateEnd: req.body.dateEnd,
-      fistName: req.body.firstName,
+      firstName: req.body.firstName,
       lastName: req.body.lastName,
       phone: req.body.phone,
       numberOfPerson: req.body.numberOfPerson,
       message: req.body.message,
-      placePrice: req.body.pricePlace,
+      placePrice: req.body.placePrice,
     };
     res.status(200).json(responce);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const cancelBooking = async (req, res, next) => {
+  try {
+    await User.updateOne(
+      { _id: req.params.id },
+      {
+        $pull: {
+          booking: {
+            reservationId: req.body.reservationId,
+          },
+        },
+      }
+    );
+    res.status(200).json(`Бронь удалена успешно`);
   } catch (err) {
     next(err);
   }

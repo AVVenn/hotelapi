@@ -25,7 +25,7 @@ mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected");
 });
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 // app.use(
 //   cors({
 //     allowedHeaders: ["sessionId", "Content-Type"],
