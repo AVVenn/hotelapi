@@ -17,7 +17,7 @@ export const updateQuestion = async (req, res, next) => {
       $set: req.body,
       new: true,
     });
-    res.status(200).json(updatedQuestion);
+    res.status(200).json(`Ответ сохранен`);
   } catch (err) {
     next(err);
   }
