@@ -17,7 +17,7 @@ export const updateNews = async (req, res, next) => {
       $set: req.body,
       new: true,
     });
-    res.status(200).json(updatedNews);
+    res.status(200).json("Новость была изменена");
   } catch (err) {
     next(err);
   }
