@@ -31,6 +31,7 @@ export const updateUserAfterBooking = async (req, res, next) => {
             numberOfPerson: req.body.numberOfPerson,
             message: req.body.message,
             placePrice: req.body.placePrice,
+            isVotedRating: req.body.isVotedRating,
           },
         },
       }
@@ -46,6 +47,7 @@ export const updateUserAfterBooking = async (req, res, next) => {
       numberOfPerson: req.body.numberOfPerson,
       message: req.body.message,
       placePrice: req.body.placePrice,
+      isVotedRating: req.body.isVotedRating,
     };
     res.status(200).json(responce);
   } catch (err) {
@@ -97,3 +99,33 @@ export const getUsers = async (req, res, next) => {
     next(err);
   }
 };
+
+export const changeFieldIsVoted = async (req, res, next) => {
+  try {
+    await User.updateOne(
+      {
+        _id: req.params.id,
+        "booking.reservationId": req.body.reservationId,
+      },
+      {
+        $set: { "booking.$.isVotedRating": true },
+      }
+    );
+    res.status(200).json("Поле 'is VotedRating' обновлено");
+  } catch (err) {
+    next(err);
+  }
+};
+
+// export const updateUser = async (req, res, next) => {
+//   try {
+//     const updatedUser = await User.findByIdAndUpdate(
+//       req.params.id,
+//       { $set: req.body },
+//       { new: true }
+//     );
+//     res.status(200).json(updatedUser);
+//   } catch (err) {
+//     next(err);
+//   }
+// };

@@ -7,6 +7,7 @@ import {
   updateRoom,
   updateRoomAvailability,
   cancelBookingRoom,
+  changeRating,
 } from "../controllers/room.js";
 import Room from "../models/Room.js";
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
@@ -19,7 +20,7 @@ router.post("/", verifyAdmin, createRoom);
 router.put("/:id", verifyAdmin, updateRoom);
 router.put("/reservation/:id", updateRoomAvailability);
 router.put("/cancel-reservation/:id", verifyUser, cancelBookingRoom);
-
+router.put("/rating/:id", verifyUser, changeRating);
 //DELETE
 router.delete("/:id", verifyAdmin, deleteRoom);
 

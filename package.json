@@ -1,7 +1,6 @@
 {
-  "name": "bookingapp",
+  "name": "apiforhotel",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -24,5 +23,14 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.12",
     "@types/jsonwebtoken": "^8.5.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AVVenn/hotelapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AVVenn/hotelapi/issues"
+  },
+  "homepage": "https://github.com/AVVenn/hotelapi#readme",
+  "description": ""
 }

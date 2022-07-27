@@ -18,10 +18,7 @@ const RoomSchema = new mongoose.Schema({
     required: true,
   },
   rating: {
-    type: Number,
-    min: 0,
-    max: 5,
-    required: true,
+    type: [Number],
   },
   price: {
     type: Number,

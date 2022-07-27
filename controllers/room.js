@@ -64,6 +64,22 @@ export const updateRoomAvailability = async (req, res, next) => {
   }
 };
 
+export const changeRating = async (req, res, next) => {
+  try {
+    await Room.updateOne(
+      { _id: req.params.id },
+      {
+        $push: {
+          rating: req.body.rating,
+        },
+      }
+    );
+    res.status(200).json("Оценка принята");
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const cancelBookingRoom = async (req, res, next) => {
   try {
     await Room.updateOne(
